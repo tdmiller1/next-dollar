@@ -1,46 +1,95 @@
-# Getting Started with Create React App
+# Investment Guide
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## FOO aka Financial Order of Operations
 
-## Available Scripts
+1. Deductibles Covered
+2. Employer Match
+3. High Interest Debt
+4. Emergency Reserves
+5. Roth & HSA
+6. Max-Out Retirement
+7. Hyper-Accumulation
+8. Pre-Paid Future Expenses
+9. Low Interest Debt
 
-In the project directory, you can run:
+### Deductibles Covered
 
-### `yarn start`
+Save up enough money to pay for healthcare deductibles
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Employer Match
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+For those that have 401k plan offered by employer, MUST contribute enough to at least get the free money (Add a calculator for this)
 
-### `yarn test`
+### **High Interest Debt**
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `yarn build`
+#### **Credit Cards**
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+$0 Revolving Debt other words don't carry a balance
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+---
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+#### **Student Loans**
 
-### `yarn eject`
+> Age 20-29 - 6%
+>
+> Age 30-39 - 5%
+>
+> Age 40-49 - 4%
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+---
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+#### **Paying off Auto Loans**
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- Put down 20% down
+- Pay your car off in 3 years or less
+- Car payment shouldn't be more than 8% of your income
+- Buying a luxury car you should pay it off in 1 year
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+---
 
-## Learn More
+### **Emergency Reserves**
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- Expense Calculator
+- 3 month, 6 month, 9 month (based on risk of job loss etc)
+- Conversative ---- Liberal multiplier
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### **Roth & HSA**
+
+- $6,000 into Roth IRA
+- $3,000 into HSA (if applicable)
+
+### **Max-Out Retirement**
+
+- Calculator to see what rate of savings user would have to in order to max out 401k
+
+### **Hyper-Accumulation**
+
+- Taxable brokerage accounts with all the leftover money
+- FIRE Folks: Bring this section in a bit earlier to calculate the time it takes to get from taxable accounts to tax-deferred
+
+### **Pre-Paid Future Expenses**
+
+- Children college accounts
+- Healthcare stuff
+
+### **Low Interest Debt**
+
+- Mortgage Debt
+- 0% interest debt etc
+
+## What do we need to know about the user
+
+1. Age
+2. Employer
+3. Fixed Income / Variable and how much
+4. 401k match
+5. Health care plans
+6. Credit cards and balances
+7. Mortgage Debt
+8. Auto Loans
+9. Student Loans
+10. Goals?
+11. Estimated expenses
+12. Zip code
