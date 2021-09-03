@@ -6,6 +6,7 @@ import debtReducer from "./features/debt/debtSlice";
 import goalsReducer from "./features/goals/goalsSlice";
 import retirementAccountReducer from "./features/retirementAccounts/retirementAccountsSlice";
 import expensesReducer from "./features/expenses/expensesSlice";
+import formManagerReducer from "./features/formManager/formManagerSlice";
 
 export const store = configureStore({
   reducer: {
@@ -15,6 +16,7 @@ export const store = configureStore({
     goals: goalsReducer,
     retirementAccounts: retirementAccountReducer,
     expenses: expensesReducer,
+    formManager: formManagerReducer,
   },
 });
 

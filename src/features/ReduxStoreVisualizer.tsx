@@ -12,6 +12,7 @@ export function ReduxStoreVisualizer(): React.ReactElement {
     (state: RootState) => state.retirementAccounts
   );
   const expenses = useSelector((state: RootState) => state.expenses);
+  const formManager = useSelector((state: RootState) => state.formManager);
   const storeJSON = {
     ...demographics,
     ...employer,
@@ -19,6 +20,7 @@ export function ReduxStoreVisualizer(): React.ReactElement {
     ...goals,
     ...retirementAccounts,
     ...expenses,
+    ...formManager,
   };
 
   return <ReactJson src={storeJSON} />;

@@ -1,26 +1,20 @@
 import React from "react";
 import { Provider } from "react-redux";
-
 import { store } from "./store";
+import { ThemeProvider, CssBaseline } from "@mui/material";
+import FormManager from "./features/formManager/FormManager";
+import { theme } from "./theme/theme";
 import { ReduxStoreVisualizer } from "./features/ReduxStoreVisualizer";
-import { Demographics } from "./features/demographics/Demographics";
-import { Employer } from "./features/employer/Employer";
-import { Expenses } from "./features/expenses/Expenses";
-import { Goals } from "./features/goals/Goals";
-import { Debt } from "./features/debt/Debt";
-import { RetirementAccounts } from "./features/retirementAccounts/RetirementAccounts";
 
 function App(): React.ReactElement {
   return (
-    <Provider store={store}>
-      <Demographics />
-      <Employer />
-      <Debt />
-      <Goals />
-      <RetirementAccounts />
-      <Expenses />
-      <ReduxStoreVisualizer />
-    </Provider>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <Provider store={store}>
+        <FormManager />
+        <ReduxStoreVisualizer />
+      </Provider>
+    </ThemeProvider>
   );
 }
 
