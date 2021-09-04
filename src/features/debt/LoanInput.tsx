@@ -44,7 +44,6 @@ export const LoanInput: React.FC<LoanInputProps> = ({ loan }) => {
       />
       <IconButton
         onClick={() => dispatch(removeLoan(loan))}
-        color="primary"
         aria-label="remove loan"
         component="span"
       >

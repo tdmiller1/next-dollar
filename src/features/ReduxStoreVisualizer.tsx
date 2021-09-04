@@ -2,6 +2,7 @@ import React from "react";
 import { RootState } from "../store";
 import { useSelector } from "react-redux";
 import ReactJson from "react-json-view";
+import { Box } from "@mui/material";
 
 export function ReduxStoreVisualizer(): React.ReactElement {
   const demographics = useSelector((state: RootState) => state.demographics);
@@ -23,5 +24,9 @@ export function ReduxStoreVisualizer(): React.ReactElement {
     ...formManager,
   };
 
-  return <ReactJson src={storeJSON} />;
+  return (
+    <Box sx={{ backgroundColor: "white" }}>
+      <ReactJson src={storeJSON} />
+    </Box>
+  );
 }

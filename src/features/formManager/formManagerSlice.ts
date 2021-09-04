@@ -9,6 +9,15 @@ export const enum FormStateType {
   RETIREMENT_ACCOUNTS = "RETIREMENT_ACCOUNTS",
 }
 
+export const formStateOrder = [
+  FormStateType.DEMOGRAPHICS,
+  FormStateType.EMPLOYER,
+  FormStateType.DEBT,
+  FormStateType.EXPENSES,
+  FormStateType.RETIREMENT_ACCOUNTS,
+  FormStateType.GOALS,
+];
+
 export interface FormManagerState {
   currentFormSection: FormStateType;
 }
@@ -21,13 +30,17 @@ export const formManagerSlice = createSlice({
   name: "formManager",
   initialState,
   reducers: {
-    updateCurrentFormSection: (state, action: PayloadAction<FormStateType>) => {
-      state.currentFormSection = action.payload;
+    completeFormSection: (state, action: PayloadAction<FormStateType>) => {
+      const currentFormSection = action.payload;
+      const currentSectionIndex = formStateOrder.indexOf(currentFormSection);
+      const nextSectionIndex = currentSectionIndex + 1;
+
+      state.currentFormSection = formStateOrder[nextSectionIndex];
     },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { updateCurrentFormSection } = formManagerSlice.actions;
+export const { completeFormSection } = formManagerSlice.actions;
 
 export default formManagerSlice.reducer;
