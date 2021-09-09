@@ -1,20 +1,21 @@
-import React from "react";
-import { RootState } from "../../store";
-import { useSelector, useDispatch } from "react-redux";
-import {
-  updateIncomeType,
-  updateSalary,
-  IncomeVariation,
-} from "./employerSlice";
 import {
   FormControl,
   FormControlLabel,
-  Input,
+  Grid,
   InputAdornment,
   InputLabel,
+  OutlinedInput,
   Radio,
   RadioGroup,
-} from "@material-ui/core";
+} from "@mui/material";
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../store";
+import {
+  IncomeVariation,
+  updateIncomeType,
+  updateSalary,
+} from "./employerSlice";
 
 export function Employer(): React.ReactElement {
   const employerData = useSelector((state: RootState) => state.employer);
@@ -22,37 +23,46 @@ export function Employer(): React.ReactElement {
   const dispatch = useDispatch();
 
   return (
-    <React.Fragment>
-      <FormControl component="fieldset">
-        <RadioGroup
-          aria-label="gender"
-          name="radio-buttons-group"
-          value={primaryIncomeType}
-          onChange={(e) =>
-            dispatch(updateIncomeType(e.target.value as IncomeVariation))
-          }
-        >
-          <FormControlLabel
-            value={IncomeVariation.FIXED}
-            control={<Radio />}
-            label="Fixed"
+    <Grid container justifyContent="center" spacing={4}>
+      <Grid item xs={12} sm={6} display="flex" flexDirection="column">
+        <FormControl component="fieldset">
+          <RadioGroup
+            aria-label="gender"
+            name="radio-buttons-group"
+            value={primaryIncomeType}
+            onChange={(e) =>
+              dispatch(updateIncomeType(e.target.value as IncomeVariation))
+            }
+          >
+            <FormControlLabel
+              value={IncomeVariation.FIXED}
+              control={<Radio />}
+              label="Fixed"
+            />
+            <FormControlLabel
+              value={IncomeVariation.VARIABLE}
+              control={<Radio />}
+              label="Variable"
+            />
+          </RadioGroup>
+        </FormControl>
+      </Grid>
+      <Grid item xs={12} sm={6} display="flex" flexDirection="column">
+        <FormControl fullWidth sx={{ m: 1 }}>
+          <InputLabel htmlFor="outlined-adornment-amount">Amount</InputLabel>
+          <OutlinedInput
+            type="number"
+            sx={{ marginBottom: 4 }}
+            id="outlined-adornment-amount"
+            label="Amount"
+            value={salary}
+            startAdornment={<InputAdornment position="start">$</InputAdornment>}
+            onChange={(e) =>
+              dispatch(updateSalary(parseInt(e.target.value, 10)))
+            }
           />
-          <FormControlLabel
-            value={IncomeVariation.VARIABLE}
-            control={<Radio />}
-            label="Variable"
-          />
-        </RadioGroup>
-      </FormControl>
-      <FormControl fullWidth>
-        <InputLabel htmlFor="standard-adornment-amount">Salary</InputLabel>
-        <Input
-          id="standard-adornment-amount"
-          value={salary}
-          onChange={(e) => dispatch(updateSalary(parseInt(e.target.value, 10)))}
-          startAdornment={<InputAdornment position="start">$</InputAdornment>}
-        />
-      </FormControl>
-    </React.Fragment>
+        </FormControl>
+      </Grid>
+    </Grid>
   );
 }

@@ -8,7 +8,14 @@ function FormManager(): React.ReactElement {
     <Navigation>
       <Box my={4} display="flex" justifyContent="center" alignItems="center">
         <Container>
-          <FormSection />
+          <Box
+            width={1}
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+          >
+            <FormSection />
+          </Box>
         </Container>
       </Box>
     </Navigation>

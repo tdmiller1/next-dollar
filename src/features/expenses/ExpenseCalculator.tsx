@@ -1,10 +1,17 @@
-import { Box, IconButton } from "@material-ui/core";
 import { Delete } from "@material-ui/icons";
+import {
+  Box,
+  Button,
+  FormControl,
+  IconButton,
+  InputLabel,
+  OutlinedInput,
+} from "@mui/material";
 import React from "react";
 import { Pie } from "react-chartjs-2";
+import { useDispatch, useSelector } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 import { RootState } from "../../store";
-import { useSelector, useDispatch } from "react-redux";
 import { addLineItem, removeLineItem, updateLineItem } from "./expensesSlice";
 
 export const ExpenseCalculator = (): React.ReactElement => {
@@ -62,30 +69,46 @@ export const ExpenseCalculator = (): React.ReactElement => {
       <Box display="flex" flexDirection="column">
         {lineItems.map((lineItem) => (
           <Box display="flex">
-            <input
-              value={lineItem.name}
-              onChange={(e) =>
-                dispatch(
-                  updateLineItem({
-                    ...lineItem,
-                    id: lineItem.id,
-                    name: e.target.value,
-                  })
-                )
-              }
-            />
-            <input
-              value={lineItem.amount}
-              onChange={(e) =>
-                dispatch(
-                  updateLineItem({
-                    ...lineItem,
-                    id: lineItem.id,
-                    amount: parseInt(e.target.value, 10),
-                  })
-                )
-              }
-            />
+            <FormControl fullWidth>
+              <InputLabel htmlFor="outlined-adornment-amount">
+                Expense Name
+              </InputLabel>
+              <OutlinedInput
+                sx={{ marginBottom: 4 }}
+                id="outlined-adornment-amount"
+                label="Expense Name"
+                value={lineItem.name}
+                onChange={(e) =>
+                  dispatch(
+                    updateLineItem({
+                      ...lineItem,
+                      id: lineItem.id,
+                      name: e.target.value,
+                    })
+                  )
+                }
+              />
+            </FormControl>
+            <FormControl fullWidth>
+              <InputLabel htmlFor="outlined-adornment-amount">
+                Expense Amount
+              </InputLabel>
+              <OutlinedInput
+                sx={{ marginBottom: 4 }}
+                id="outlined-adornment-amount"
+                label="Expense Amount"
+                value={lineItem.amount}
+                onChange={(e) =>
+                  dispatch(
+                    updateLineItem({
+                      ...lineItem,
+                      id: lineItem.id,
+                      amount: parseInt(e.target.value, 10),
+                    })
+                  )
+                }
+              />
+            </FormControl>
             <IconButton
               onClick={() => {
                 dispatch(removeLineItem(lineItem));
@@ -98,7 +121,9 @@ export const ExpenseCalculator = (): React.ReactElement => {
             </IconButton>
           </Box>
         ))}
-        <button onClick={handleAddLineItem}>Add</button>
+        <Button onClick={handleAddLineItem} sx={{ mr: 1 }}>
+          Add
+        </Button>
         Total Expenses: {expenseState.expensesTotal}
       </Box>
       <Box display="flex" flexDirection="column">

@@ -11,3 +11,9 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+.personImage {
+  object-fit: contain;
+  width: 431;
+  height: 600;
+}
