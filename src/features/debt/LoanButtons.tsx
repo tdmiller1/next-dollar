@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 import { addLoan, LoanType } from "./debtSlice";
-import { Button } from "@material-ui/core";
+import { Box, Button } from "@mui/material";
 import DirectionsCarIcon from "@material-ui/icons/DirectionsCar";
 import SchoolIcon from "@material-ui/icons/School";
 import HouseIcon from "@material-ui/icons/House";
@@ -22,8 +22,9 @@ export default function LoanButtons(): React.ReactElement {
   }
 
   return (
-    <React.Fragment>
+    <Box display="flex" flexDirection="column">
       <Button
+        sx={{ margin: 2 }}
         onClick={() => handleAddLoan(LoanType.AUTO)}
         aria-label="add auto loan"
         variant="outlined"
@@ -32,6 +33,7 @@ export default function LoanButtons(): React.ReactElement {
         Auto Loan
       </Button>
       <Button
+        sx={{ margin: 2 }}
         onClick={() => handleAddLoan(LoanType.STUDENT)}
         aria-label="add student loan"
         variant="outlined"
@@ -40,6 +42,7 @@ export default function LoanButtons(): React.ReactElement {
         Student Loan
       </Button>
       <Button
+        sx={{ margin: 2 }}
         onClick={() => handleAddLoan(LoanType.MORTGAGE)}
         aria-label="add mortgage"
         variant="outlined"
@@ -48,6 +51,7 @@ export default function LoanButtons(): React.ReactElement {
         Mortgage
       </Button>
       <Button
+        sx={{ margin: 2 }}
         onClick={() => handleAddLoan(LoanType.CREDIT)}
         aria-label="add credit card debt"
         variant="outlined"
@@ -56,6 +60,7 @@ export default function LoanButtons(): React.ReactElement {
         Credit Card
       </Button>
       <Button
+        sx={{ margin: 2 }}
         onClick={() => handleAddLoan(LoanType.OTHER)}
         aria-label="add other loan"
         variant="outlined"
@@ -63,6 +68,6 @@ export default function LoanButtons(): React.ReactElement {
       >
         Other
       </Button>
-    </React.Fragment>
+    </Box>
   );
 }

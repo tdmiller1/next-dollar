@@ -1,7 +1,6 @@
 import {
   FormControl,
   FormControlLabel,
-  Grid,
   InputAdornment,
   InputLabel,
   OutlinedInput,
@@ -10,6 +9,7 @@ import {
 } from "@mui/material";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import Layout from "../../components/Layout";
 import { RootState } from "../../store";
 import {
   IncomeVariation,
@@ -23,8 +23,8 @@ export function Employer(): React.ReactElement {
   const dispatch = useDispatch();
 
   return (
-    <Grid container justifyContent="center" spacing={4}>
-      <Grid item xs={12} sm={6} display="flex" flexDirection="column">
+    <Layout
+      leftColumn={
         <FormControl component="fieldset">
           <RadioGroup
             aria-label="gender"
@@ -46,8 +46,8 @@ export function Employer(): React.ReactElement {
             />
           </RadioGroup>
         </FormControl>
-      </Grid>
-      <Grid item xs={12} sm={6} display="flex" flexDirection="column">
+      }
+      rightColumn={
         <FormControl fullWidth sx={{ m: 1 }}>
           <InputLabel htmlFor="outlined-adornment-amount">Amount</InputLabel>
           <OutlinedInput
@@ -62,7 +62,7 @@ export function Employer(): React.ReactElement {
             }
           />
         </FormControl>
-      </Grid>
-    </Grid>
+      }
+    />
   );
 }
