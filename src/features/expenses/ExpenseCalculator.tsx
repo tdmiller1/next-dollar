@@ -6,15 +6,20 @@ import {
   IconButton,
   InputLabel,
   OutlinedInput,
+  Typography,
+  useMediaQuery,
 } from "@mui/material";
 import React from "react";
 import { Pie } from "react-chartjs-2";
+import { useTheme } from "@mui/material/styles";
 import { useDispatch, useSelector } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 import { RootState } from "../../store";
 import { addLineItem, removeLineItem, updateLineItem } from "./expensesSlice";
 
 export const ExpenseCalculator = (): React.ReactElement => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("lg"));
   const expenseState = useSelector((state: RootState) => state.expenses);
   const { lineItems } = expenseState;
   const budgetLabels = lineItems.map((lineItem) => lineItem.name);
@@ -60,73 +65,8 @@ export const ExpenseCalculator = (): React.ReactElement => {
   }
 
   return (
-    <Box
-      margin={3}
-      display="flex"
-      flexDirection="row"
-      justifyContent="space-around"
-    >
-      <Box display="flex" flexDirection="column">
-        {lineItems.map((lineItem) => (
-          <Box display="flex">
-            <FormControl fullWidth>
-              <InputLabel htmlFor="outlined-adornment-amount">
-                Expense Name
-              </InputLabel>
-              <OutlinedInput
-                sx={{ marginBottom: 4 }}
-                id="outlined-adornment-amount"
-                label="Expense Name"
-                value={lineItem.name}
-                onChange={(e) =>
-                  dispatch(
-                    updateLineItem({
-                      ...lineItem,
-                      id: lineItem.id,
-                      name: e.target.value,
-                    })
-                  )
-                }
-              />
-            </FormControl>
-            <FormControl fullWidth>
-              <InputLabel htmlFor="outlined-adornment-amount">
-                Expense Amount
-              </InputLabel>
-              <OutlinedInput
-                sx={{ marginBottom: 4 }}
-                id="outlined-adornment-amount"
-                label="Expense Amount"
-                value={lineItem.amount}
-                onChange={(e) =>
-                  dispatch(
-                    updateLineItem({
-                      ...lineItem,
-                      id: lineItem.id,
-                      amount: parseInt(e.target.value, 10),
-                    })
-                  )
-                }
-              />
-            </FormControl>
-            <IconButton
-              onClick={() => {
-                dispatch(removeLineItem(lineItem));
-              }}
-              color="primary"
-              aria-label="remove line item"
-              component="span"
-            >
-              <Delete />
-            </IconButton>
-          </Box>
-        ))}
-        <Button onClick={handleAddLineItem} sx={{ mr: 1 }}>
-          Add
-        </Button>
-        Total Expenses: {expenseState.expensesTotal}
-      </Box>
-      <Box display="flex" flexDirection="column">
+    <>
+      <Box display="flex" flexDirection="column" marginLeft={4} maxHeight={200}>
         <Pie
           data={data}
           height={200}
@@ -134,6 +74,84 @@ export const ExpenseCalculator = (): React.ReactElement => {
           options={{ maintainAspectRatio: false }}
         />
       </Box>
-    </Box>
+      <Typography variant="h6" sx={{ margin: 2 }}>
+        Total Expenses: {expenseState.expensesTotal}
+      </Typography>
+      <Box
+        margin={isMobile ? 1 : 3}
+        display="flex"
+        flexDirection="row"
+        justifyContent="space-around"
+      >
+        <Box display="flex" flexDirection="column">
+          {lineItems.map((lineItem) => (
+            <Box
+              display="flex"
+              justifyContent="space-around"
+              alignItems="center"
+              flexDirection="row"
+            >
+              <Box margin={isMobile ? 1 : 2}>
+                <FormControl fullWidth>
+                  <InputLabel htmlFor="outlined-adornment-amount">
+                    Expense Name
+                  </InputLabel>
+                  <OutlinedInput
+                    id="outlined-adornment-amount"
+                    label="Expense Name"
+                    value={lineItem.name}
+                    onChange={(e) =>
+                      dispatch(
+                        updateLineItem({
+                          ...lineItem,
+                          id: lineItem.id,
+                          name: e.target.value,
+                        })
+                      )
+                    }
+                  />
+                </FormControl>
+              </Box>
+              <Box margin={isMobile ? 1 : 2}>
+                <FormControl fullWidth>
+                  <InputLabel htmlFor="outlined-adornment-amount">
+                    Expense Amount
+                  </InputLabel>
+                  <OutlinedInput
+                    id="outlined-adornment-amount"
+                    label="Expense Amount"
+                    value={lineItem.amount}
+                    onChange={(e) =>
+                      dispatch(
+                        updateLineItem({
+                          ...lineItem,
+                          id: lineItem.id,
+                          amount: parseInt(e.target.value, 10),
+                        })
+                      )
+                    }
+                  />
+                </FormControl>
+              </Box>
+              <Box margin={isMobile ? 1 : 2}>
+                <IconButton
+                  onClick={() => {
+                    dispatch(removeLineItem(lineItem));
+                  }}
+                  color="primary"
+                  aria-label="remove line item"
+                  component="span"
+                >
+                  <Delete />
+                </IconButton>
+              </Box>
+            </Box>
+          ))}
+          <Button sx={{ mt: 2 }} onClick={handleAddLineItem}>
+            Add
+          </Button>
+        </Box>
+      </Box>
+    </>
   );
 };

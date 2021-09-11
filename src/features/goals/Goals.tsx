@@ -30,9 +30,14 @@ export function Goals(): React.ReactElement {
         name="controlled-radio-buttons-group"
         value={goalType}
       >
-        <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-          <Grid item xs={6}>
-            <Card>
+        <Grid
+          container
+          justifyContent="center"
+          rowSpacing={2}
+          columnSpacing={{ md: 4 }}
+        >
+          <Grid item sm={12} md={6}>
+            <Card sx={{ minWidth: 375 }}>
               <CardActionArea
                 onClick={() => dispatch(updateGoalType(GoalType.FIRE))}
               >
@@ -54,8 +59,8 @@ export function Goals(): React.ReactElement {
               </CardActionArea>
             </Card>
           </Grid>
-          <Grid item xs={6}>
-            <Card>
+          <Grid item sm={12} md={6}>
+            <Card sx={{ minWidth: 375 }}>
               <CardActionArea
                 onClick={() =>
                   dispatch(updateGoalType(GoalType.RETIRE_COMFORTABLY))
@@ -79,8 +84,8 @@ export function Goals(): React.ReactElement {
               </CardActionArea>
             </Card>
           </Grid>
-          <Grid item xs={6}>
-            <Card>
+          <Grid item sm={12} md={6}>
+            <Card sx={{ minWidth: 375 }}>
               <CardActionArea
                 onClick={() => dispatch(updateGoalType(GoalType.CATCH_UP))}
               >
@@ -102,8 +107,8 @@ export function Goals(): React.ReactElement {
               </CardActionArea>
             </Card>
           </Grid>
-          <Grid item xs={6}>
-            <Card>
+          <Grid item sm={12} md={6}>
+            <Card sx={{ minWidth: 375 }}>
               <CardActionArea
                 onClick={() => dispatch(updateGoalType(GoalType.PAYCHECK))}
               >

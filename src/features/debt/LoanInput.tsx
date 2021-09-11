@@ -1,7 +1,17 @@
 import { IconButton } from "@material-ui/core";
 import { Delete } from "@material-ui/icons";
+import {
+  Box,
+  FormControl,
+  InputLabel,
+  OutlinedInput,
+  Typography,
+  useMediaQuery,
+} from "@mui/material";
+import { useTheme } from "@mui/material/styles";
 import React from "react";
 import { useDispatch } from "react-redux";
+import { isNegative } from "../../helpers/hooks";
 import { updateLoan, removeLoan, Loan } from "./debtSlice";
 
 interface LoanInputProps {
@@ -10,38 +20,67 @@ interface LoanInputProps {
 
 export const LoanInput: React.FC<LoanInputProps> = ({ loan }) => {
   const dispatch = useDispatch();
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("lg"));
 
   return (
-    <div>
-      {loan.type}
-      <input
-        value={loan.amount}
-        type="number"
-        onChange={(e) =>
-          dispatch(
-            updateLoan({
-              ...loan,
-              id: loan.id,
-              amount: parseInt(e.target.value, 10),
-            })
-          )
-        }
-        placeholder="Amount"
-      />
-      <input
-        value={loan.interestRate}
-        type="number"
-        onChange={(e) =>
-          dispatch(
-            updateLoan({
-              ...loan,
-              id: loan.id,
-              interestRate: parseInt(e.target.value, 10),
-            })
-          )
-        }
-        placeholder="Interest Rate"
-      />
+    <Box
+      display="flex"
+      justifyContent="space-around"
+      alignItems="center"
+      flexDirection="row"
+    >
+      <Typography variant="body1" sx={{ minWidth: isMobile ? 90 : 175 }}>
+        {loan.type}
+      </Typography>
+      <Box margin={isMobile ? 1 : 2}>
+        <FormControl fullWidth>
+          <InputLabel htmlFor="outlined-adornment-amount1">Amount</InputLabel>
+          <OutlinedInput
+            id="outlined-adornment-amount1"
+            label="Amount"
+            type="number"
+            placeholder="Amount"
+            value={loan.amount}
+            onChange={(e) => {
+              const amount = parseInt(e.target.value, 10);
+              if (amount) return;
+              dispatch(
+                updateLoan({
+                  ...loan,
+                  id: loan.id,
+                  amount,
+                })
+              );
+            }}
+          />
+        </FormControl>
+      </Box>
+      <Box margin={isMobile ? 0 : 2}>
+        <FormControl fullWidth>
+          <InputLabel htmlFor="outlined-adornment-amount2">
+            Interest Rate
+          </InputLabel>
+          <OutlinedInput
+            id="outlined-adornment-amount2"
+            label="Interest Rate"
+            value={loan.interestRate}
+            type="number"
+            onChange={(e) => {
+              const interestRate = parseInt(e.target.value, 10);
+              if (isNegative(interestRate)) return;
+              dispatch(
+                updateLoan({
+                  ...loan,
+                  id: loan.id,
+                  interestRate,
+                })
+              );
+            }}
+            placeholder="Interest Rate"
+          />
+        </FormControl>
+      </Box>
       <IconButton
         onClick={() => dispatch(removeLoan(loan))}
         aria-label="remove loan"
@@ -49,6 +88,6 @@ export const LoanInput: React.FC<LoanInputProps> = ({ loan }) => {
       >
         <Delete />
       </IconButton>
-    </div>
+    </Box>
   );
 };

@@ -1,16 +1,18 @@
 import React from "react";
 import {
   FormGroup,
+  Grid,
   FormControlLabel,
   Checkbox,
   FormControl,
-  Input,
   InputAdornment,
   InputLabel,
   Box,
-} from "@material-ui/core";
+  OutlinedInput,
+} from "@mui/material";
 import { RootState } from "../../store";
 import { useSelector, useDispatch } from "react-redux";
+import { isNegative } from "../../helpers/hooks";
 
 import {
   toggleRetirementAccount,
@@ -56,55 +58,74 @@ export function RetirementAccounts(): React.ReactElement {
   ];
 
   return (
-    <FormGroup>
-      {RETIREMENT_ACCOUNTS.map((account) => {
-        const accountData =
-          retirementAccountsData.retirementAccounts[account.id];
-        return (
-          <Box margin={2} display="flex" flexDirection="row">
-            <FormControlLabel
-              control={
-                <Checkbox
-                  checked={accountData.active}
-                  onChange={(e) => {
-                    dispatch(
-                      toggleRetirementAccount({
-                        ...accountData,
-                        account,
-                        checked: e.target.checked,
-                        amount: accountData.amount,
-                      })
-                    );
-                  }}
-                />
-              }
-              label={account.name}
-            />
-            <FormControl fullWidth>
-              <InputLabel htmlFor="standard-adornment-amount">
-                Amount
-              </InputLabel>
-              <Input
-                id={`${account.name}-standard-adornment-amount`}
-                value={accountData.amount}
-                onChange={(e) => {
-                  dispatch(
-                    toggleRetirementAccount({
-                      ...accountData,
-                      account,
-                      amount: parseInt(e.target.value, 10),
-                      checked: accountData.active,
-                    })
-                  );
-                }}
-                startAdornment={
-                  <InputAdornment position="start">$</InputAdornment>
-                }
-              />
-            </FormControl>
-          </Box>
-        );
-      })}
-    </FormGroup>
+    <Grid container justifyContent="center" spacing={4}>
+      <Grid item xs={12} sm={6} display="flex" flexDirection="column">
+        <FormGroup>
+          {RETIREMENT_ACCOUNTS.map((account) => {
+            const accountData =
+              retirementAccountsData.retirementAccounts[account.id];
+            return (
+              <Box
+                margin={2}
+                display="flex"
+                flexDirection="row"
+                alignItems="center"
+              >
+                <Box display="flex" sx={{ minWidth: 175 }}>
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        checked={accountData.active}
+                        onChange={(e) => {
+                          dispatch(
+                            toggleRetirementAccount({
+                              ...accountData,
+                              account,
+                              checked: e.target.checked,
+                              amount: accountData.amount,
+                            })
+                          );
+                        }}
+                      />
+                    }
+                    label={account.name}
+                  />
+                </Box>
+                <FormControl fullWidth sx={{ m: 1 }}>
+                  <InputLabel
+                    disabled={!accountData.active}
+                    htmlFor="outlined-adornment-amount"
+                  >
+                    Amount
+                  </InputLabel>
+                  <OutlinedInput
+                    type="number"
+                    id="outlined-adornment-amount"
+                    disabled={!accountData.active}
+                    label="Amount"
+                    startAdornment={
+                      <InputAdornment position="start">$</InputAdornment>
+                    }
+                    value={accountData.amount}
+                    onChange={(e) => {
+                      const amount = parseInt(e.target.value, 10);
+                      if (isNegative(amount)) return;
+                      dispatch(
+                        toggleRetirementAccount({
+                          ...accountData,
+                          account,
+                          amount,
+                          checked: accountData.active,
+                        })
+                      );
+                    }}
+                  />
+                </FormControl>
+              </Box>
+            );
+          })}
+        </FormGroup>
+      </Grid>
+    </Grid>
   );
 }
