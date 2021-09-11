@@ -2,6 +2,7 @@ import { TextField, Typography } from "@mui/material";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Layout from "../../components/Layout";
+import { isNegative } from "../../helpers/hooks";
 import Person from "../../static/images/person.png";
 import { RootState } from "../../store";
 import { updateAge, updateFirstName } from "./demographicSlice";
@@ -31,7 +32,11 @@ export function Demographics(): React.ReactElement {
             variant="outlined"
             type="number"
             value={age}
-            onChange={(e) => dispatch(updateAge(parseInt(e.target.value, 10)))}
+            onChange={(e) => {
+              const age = parseInt(e.target.value, 10);
+              if (isNegative(age)) return;
+              dispatch(updateAge(age));
+            }}
           />
         </>
       }

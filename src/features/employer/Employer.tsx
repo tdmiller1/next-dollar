@@ -10,6 +10,7 @@ import {
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Layout from "../../components/Layout";
+import { isNegative } from "../../helpers/hooks";
 import { RootState } from "../../store";
 import {
   IncomeVariation,
@@ -57,9 +58,11 @@ export function Employer(): React.ReactElement {
             label="Amount"
             value={salary}
             startAdornment={<InputAdornment position="start">$</InputAdornment>}
-            onChange={(e) =>
-              dispatch(updateSalary(parseInt(e.target.value, 10)))
-            }
+            onChange={(e) => {
+              const salary = parseInt(e.target.value, 10);
+              if (isNegative(salary)) return;
+              dispatch(updateSalary(salary));
+            }}
           />
         </FormControl>
       }

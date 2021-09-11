@@ -9,6 +9,7 @@ import {
 } from "@mui/material";
 import React from "react";
 import { useDispatch } from "react-redux";
+import { isNegative } from "../../helpers/hooks";
 import { updateLoan, removeLoan, Loan } from "./debtSlice";
 
 interface LoanInputProps {
@@ -37,15 +38,17 @@ export const LoanInput: React.FC<LoanInputProps> = ({ loan }) => {
             type="number"
             placeholder="Amount"
             value={loan.amount}
-            onChange={(e) =>
+            onChange={(e) => {
+              const amount = parseInt(e.target.value, 10);
+              if (amount) return;
               dispatch(
                 updateLoan({
                   ...loan,
                   id: loan.id,
-                  amount: parseInt(e.target.value, 10),
+                  amount,
                 })
-              )
-            }
+              );
+            }}
           />
         </FormControl>
       </Box>
@@ -59,15 +62,17 @@ export const LoanInput: React.FC<LoanInputProps> = ({ loan }) => {
             label="Interest Rate"
             value={loan.interestRate}
             type="number"
-            onChange={(e) =>
+            onChange={(e) => {
+              const interestRate = parseInt(e.target.value, 10);
+              if (isNegative(interestRate)) return;
               dispatch(
                 updateLoan({
                   ...loan,
                   id: loan.id,
-                  interestRate: parseInt(e.target.value, 10),
+                  interestRate,
                 })
-              )
-            }
+              );
+            }}
             placeholder="Interest Rate"
           />
         </FormControl>
