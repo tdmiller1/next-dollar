@@ -4,6 +4,10 @@ export interface ExpensesAction {
   expensesType: ExpensesType;
 }
 
+export interface FixedExpensesTotal {
+  fixedExpenseTotal: number;
+}
+
 export const enum ExpensesType {
   FIXED = "FIXED",
   CALCULATED = "CALCULATED",
@@ -16,12 +20,14 @@ export interface LineItem {
 }
 
 export interface ExpensesState {
+  fixedExpenseTotal: number;
   expensesType: ExpensesType;
   expensesTotal: number;
   lineItems: LineItem[];
 }
 
 const initialState: ExpensesState = {
+  fixedExpenseTotal: 0,
   expensesType: ExpensesType.FIXED,
   expensesTotal: 30,
   lineItems: [
@@ -44,6 +50,12 @@ export const expensesSlice = createSlice({
   reducers: {
     updateExpensesType: (state, action: PayloadAction<ExpensesAction>) => {
       state.expensesType = action.payload.expensesType;
+    },
+    updateFixedExpensesValue: (
+      state,
+      action: PayloadAction<FixedExpensesTotal>
+    ) => {
+      state.fixedExpenseTotal = action.payload.fixedExpenseTotal;
     },
     addLineItem: (state, action: PayloadAction<LineItem>) => {
       state.lineItems = [...state.lineItems, action.payload];
@@ -82,6 +94,7 @@ export const {
   addLineItem,
   removeLineItem,
   updateLineItem,
+  updateFixedExpensesValue,
 } = expensesSlice.actions;
 
 export default expensesSlice.reducer;
