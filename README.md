@@ -1,22 +1,23 @@
 # 🚧 Investment Guide 🚧
 
 To run work in progress
+
 ```bash
 $ npm install
 $ npm start
 ```
 
-- [X] User Input Form ✔️
-- [ ] User Authentication 🚧
+- [x] User Input Form ✔️
+- [ ] User Authentication 🚀
 - [ ] User Financial Plan Creation ⌚
 - [ ] User Financial Plan Progress Saver ⌚
 
 | State of Development | Symbol |
 | -------------------- | ------ |
-| Completed | ✔️ |
-| In Progress | 🚀 |
-| Planning | 🚧 |
-| Not Started | ⌚ |
+| Completed            | ✔️     |
+| In Progress          | 🚀     |
+| Planning             | 🚧     |
+| Not Started          | ⌚     |
 
 ## FOO aka Financial Order of Operations
 
@@ -111,4 +112,3 @@ $0 Revolving Debt other words don't carry a balance
 10. Goals?
 11. Estimated expenses
 12. Zip code
-
