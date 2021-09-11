@@ -1,9 +1,8 @@
-import { TextField, Typography } from "@mui/material";
+import { TextField } from "@mui/material";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Layout from "../../components/Layout";
 import { isNegative } from "../../helpers/hooks";
-import Person from "../../static/images/person.png";
 import { RootState } from "../../store";
 import { updateAge, updateFirstName } from "./demographicSlice";
 
@@ -40,22 +39,7 @@ export function Demographics(): React.ReactElement {
           />
         </>
       }
-      rightColumn={
-        <>
-          <img className="personImage" src={Person} width={300} />
-          <Typography
-            variant="h4"
-            sx={{
-              position: "absolute",
-              top: "auto",
-              paddingTop: "115px",
-              color: "black",
-            }}
-          >
-            {firstName}
-          </Typography>
-        </>
-      }
+      rightColumn={<React.Fragment></React.Fragment>}
     />
   );
 }
