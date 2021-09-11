@@ -6,7 +6,7 @@ $ npm install
 $ npm start
 ```
 
-- [ ] User Input Form 🚀
+- [X] User Input Form ✔️
 - [ ] User Authentication 🚧
 - [ ] User Financial Plan Creation ⌚
 - [ ] User Financial Plan Progress Saver ⌚
