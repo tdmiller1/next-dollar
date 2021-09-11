@@ -7,15 +7,19 @@ import {
   InputLabel,
   OutlinedInput,
   Typography,
+  useMediaQuery,
 } from "@mui/material";
 import React from "react";
 import { Pie } from "react-chartjs-2";
+import { useTheme } from "@mui/material/styles";
 import { useDispatch, useSelector } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 import { RootState } from "../../store";
 import { addLineItem, removeLineItem, updateLineItem } from "./expensesSlice";
 
 export const ExpenseCalculator = (): React.ReactElement => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("lg"));
   const expenseState = useSelector((state: RootState) => state.expenses);
   const { lineItems } = expenseState;
   const budgetLabels = lineItems.map((lineItem) => lineItem.name);
@@ -74,7 +78,7 @@ export const ExpenseCalculator = (): React.ReactElement => {
         Total Expenses: {expenseState.expensesTotal}
       </Typography>
       <Box
-        margin={3}
+        margin={isMobile ? 1 : 3}
         display="flex"
         flexDirection="row"
         justifyContent="space-around"
@@ -87,7 +91,7 @@ export const ExpenseCalculator = (): React.ReactElement => {
               alignItems="center"
               flexDirection="row"
             >
-              <Box margin={2}>
+              <Box margin={isMobile ? 1 : 2}>
                 <FormControl fullWidth>
                   <InputLabel htmlFor="outlined-adornment-amount">
                     Expense Name
@@ -108,7 +112,7 @@ export const ExpenseCalculator = (): React.ReactElement => {
                   />
                 </FormControl>
               </Box>
-              <Box margin={2}>
+              <Box margin={isMobile ? 1 : 2}>
                 <FormControl fullWidth>
                   <InputLabel htmlFor="outlined-adornment-amount">
                     Expense Amount
@@ -129,7 +133,7 @@ export const ExpenseCalculator = (): React.ReactElement => {
                   />
                 </FormControl>
               </Box>
-              <Box margin={2}>
+              <Box margin={isMobile ? 1 : 2}>
                 <IconButton
                   onClick={() => {
                     dispatch(removeLineItem(lineItem));
@@ -143,7 +147,7 @@ export const ExpenseCalculator = (): React.ReactElement => {
               </Box>
             </Box>
           ))}
-          <Button onClick={handleAddLineItem} sx={{ mr: 1 }}>
+          <Button sx={{ mt: 2 }} onClick={handleAddLineItem}>
             Add
           </Button>
         </Box>

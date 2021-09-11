@@ -96,7 +96,7 @@ const Navigation: React.FC<NavigationProps> = (props) => {
         </Stepper>
       </Box>
 
-      <Box ml="auto" mr="auto" my={4} sx={{ height: "100vh", width: "90vw" }}>
+      <Box ml="auto" mr="auto" my={4} sx={{ height: "100vh", width: "95vw" }}>
         {allStepsCompleted() ? (
           <React.Fragment>
             <Typography sx={{ mt: 2, mb: 1 }}>

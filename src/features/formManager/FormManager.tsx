@@ -7,7 +7,18 @@ function FormManager(): React.ReactElement {
   return (
     <Navigation>
       <Box my={4} display="flex" justifyContent="center" alignItems="center">
-        <Container>
+        <Container
+          sx={{
+            "@media screen and (min-width: 600px)": {
+              paddingLeft: "8px",
+              paddingRight: "8px",
+            },
+            "@media screen and (max-width: 600px)": {
+              paddingLeft: "8px",
+              paddingRight: "8px",
+            },
+          }}
+        >
           <Box
             width={1}
             display="flex"

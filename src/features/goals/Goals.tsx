@@ -30,9 +30,14 @@ export function Goals(): React.ReactElement {
         name="controlled-radio-buttons-group"
         value={goalType}
       >
-        <Grid container rowSpacing={2} columnSpacing={{ md: 4 }}>
+        <Grid
+          container
+          justifyContent="center"
+          rowSpacing={2}
+          columnSpacing={{ md: 4 }}
+        >
           <Grid item sm={12} md={6}>
-            <Card>
+            <Card sx={{ minWidth: 375 }}>
               <CardActionArea
                 onClick={() => dispatch(updateGoalType(GoalType.FIRE))}
               >
@@ -55,7 +60,7 @@ export function Goals(): React.ReactElement {
             </Card>
           </Grid>
           <Grid item sm={12} md={6}>
-            <Card>
+            <Card sx={{ minWidth: 375 }}>
               <CardActionArea
                 onClick={() =>
                   dispatch(updateGoalType(GoalType.RETIRE_COMFORTABLY))
@@ -80,7 +85,7 @@ export function Goals(): React.ReactElement {
             </Card>
           </Grid>
           <Grid item sm={12} md={6}>
-            <Card>
+            <Card sx={{ minWidth: 375 }}>
               <CardActionArea
                 onClick={() => dispatch(updateGoalType(GoalType.CATCH_UP))}
               >
@@ -103,7 +108,7 @@ export function Goals(): React.ReactElement {
             </Card>
           </Grid>
           <Grid item sm={12} md={6}>
-            <Card>
+            <Card sx={{ minWidth: 375 }}>
               <CardActionArea
                 onClick={() => dispatch(updateGoalType(GoalType.PAYCHECK))}
               >

@@ -6,7 +6,9 @@ import {
   InputLabel,
   OutlinedInput,
   Typography,
+  useMediaQuery,
 } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
 import React from "react";
 import { useDispatch } from "react-redux";
 import { isNegative } from "../../helpers/hooks";
@@ -18,6 +20,8 @@ interface LoanInputProps {
 
 export const LoanInput: React.FC<LoanInputProps> = ({ loan }) => {
   const dispatch = useDispatch();
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("lg"));
 
   return (
     <Box
@@ -26,10 +30,10 @@ export const LoanInput: React.FC<LoanInputProps> = ({ loan }) => {
       alignItems="center"
       flexDirection="row"
     >
-      <Typography variant="body1" sx={{ minWidth: 100 }}>
+      <Typography variant="body1" sx={{ minWidth: isMobile ? 90 : 175 }}>
         {loan.type}
       </Typography>
-      <Box margin={2}>
+      <Box margin={isMobile ? 1 : 2}>
         <FormControl fullWidth>
           <InputLabel htmlFor="outlined-adornment-amount1">Amount</InputLabel>
           <OutlinedInput
@@ -52,7 +56,7 @@ export const LoanInput: React.FC<LoanInputProps> = ({ loan }) => {
           />
         </FormControl>
       </Box>
-      <Box margin={2}>
+      <Box margin={isMobile ? 0 : 2}>
         <FormControl fullWidth>
           <InputLabel htmlFor="outlined-adornment-amount2">
             Interest Rate

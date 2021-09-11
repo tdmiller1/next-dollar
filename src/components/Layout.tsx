@@ -11,10 +11,26 @@ export default function Layout(props: LayoutProps): React.ReactElement {
 
   return (
     <Grid container justifyContent="center" spacing={4}>
-      <Grid item xs={12} sm={6} display="flex" flexDirection="column">
+      <Grid
+        item
+        xs={12}
+        md={6}
+        display="flex"
+        flexDirection="column"
+        justifyContent="center"
+        alignItems="center"
+      >
         {leftColumn}
       </Grid>
-      <Grid item xs={12} sm={6} display="flex" flexDirection="column">
+      <Grid
+        item
+        xs={12}
+        md={6}
+        display="flex"
+        flexDirection="column"
+        justifyContent="center"
+        alignItems="center"
+      >
         {rightColumn}
       </Grid>
     </Grid>
