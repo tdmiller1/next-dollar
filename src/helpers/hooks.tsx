@@ -1,5 +1,3 @@
-export const isNegative = (number: number): boolean => number < 0;
-
 interface MyType {
   [name: string]: string;
 }
@@ -20,4 +18,11 @@ export const getQueryParams = (): MyType => {
   }
 
   return {};
+};
+
+export const isNegative = (number: string | number): boolean => {
+  if (typeof number === "number") {
+    return number < 0;
+  }
+  return parseInt(number, 10) < 0;
 };

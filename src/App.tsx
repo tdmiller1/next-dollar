@@ -5,7 +5,7 @@ import { ThemeProvider, CssBaseline, Box } from "@mui/material";
 import FormManager from "./features/formManager/FormManager";
 import { theme } from "./theme/theme";
 import { Redirect, Route, useHistory } from "react-router-dom";
-// import { ReduxStoreVisualizer } from "./features/ReduxStoreVisualizer";
+import { ReduxStoreVisualizer } from "./features/ReduxStoreVisualizer";
 // import { ThemeVisualizer } from "./features/ThemeVisualizer";
 
 function App(): React.ReactElement {
@@ -49,8 +49,8 @@ function App(): React.ReactElement {
             </Box>
           )}
         </Route>
-        {/* <ThemeVisualizer />
-        <ReduxStoreVisualizer /> */}
+        {/* <ThemeVisualizer />*/}
+        <ReduxStoreVisualizer />
       </Provider>
     </ThemeProvider>
   );

@@ -15,8 +15,8 @@ export default function LoanButtons(): React.ReactElement {
       addLoan({
         id: uuidv4(),
         type,
-        amount: 100,
-        interestRate: 0.4,
+        amount: "100",
+        interestRate: "4.03",
       })
     );
   }
