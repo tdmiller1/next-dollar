@@ -39,12 +39,11 @@ export const LoanInput: React.FC<LoanInputProps> = ({ loan }) => {
           <OutlinedInput
             id="outlined-adornment-amount1"
             label="Amount"
-            type="number"
             placeholder="Amount"
             value={loan.amount}
             onChange={(e) => {
-              const amount = parseInt(e.target.value, 10);
-              if (amount) return;
+              const amount = e.target.value;
+              if (isNegative(amount)) return;
               dispatch(
                 updateLoan({
                   ...loan,
@@ -65,9 +64,8 @@ export const LoanInput: React.FC<LoanInputProps> = ({ loan }) => {
             id="outlined-adornment-amount2"
             label="Interest Rate"
             value={loan.interestRate}
-            type="number"
             onChange={(e) => {
-              const interestRate = parseInt(e.target.value, 10);
+              const interestRate = e.target.value;
               if (isNegative(interestRate)) return;
               dispatch(
                 updateLoan({

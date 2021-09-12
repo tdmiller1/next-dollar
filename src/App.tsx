@@ -4,7 +4,7 @@ import { store } from "./store";
 import { ThemeProvider, CssBaseline, Box } from "@mui/material";
 import FormManager from "./features/formManager/FormManager";
 import { theme } from "./theme/theme";
-// import { ReduxStoreVisualizer } from "./features/ReduxStoreVisualizer";
+import { ReduxStoreVisualizer } from "./features/ReduxStoreVisualizer";
 // import { ThemeVisualizer } from "./features/ThemeVisualizer";
 
 function App(): React.ReactElement {
@@ -15,8 +15,8 @@ function App(): React.ReactElement {
         <Box sx={{ height: "100vh", width: "100vw", margin: 0, padding: 0 }}>
           <FormManager />
         </Box>
-        {/* <ThemeVisualizer />
-        <ReduxStoreVisualizer /> */}
+        {/* <ThemeVisualizer />*/}
+        <ReduxStoreVisualizer />
       </Provider>
     </ThemeProvider>
   );

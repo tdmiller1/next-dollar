@@ -11,8 +11,8 @@ export const enum LoanType {
 export interface Loan {
   id: string;
   type: LoanType;
-  amount: number;
-  interestRate: number;
+  amount: string;
+  interestRate: string;
 }
 
 export interface DebtSlice {
