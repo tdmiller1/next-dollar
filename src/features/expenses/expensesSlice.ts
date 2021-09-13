@@ -1,5 +1,9 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
+export interface ExpensesRange {
+  expensesRange: number | number[];
+}
+
 export interface ExpensesAction {
   expensesType: ExpensesType;
 }
@@ -23,6 +27,7 @@ export interface ExpensesState {
   fixedExpenseTotal: number;
   expensesType: ExpensesType;
   expensesTotal: number;
+  expensesRange: number | number[];
   lineItems: LineItem[];
 }
 
@@ -30,6 +35,7 @@ const initialState: ExpensesState = {
   fixedExpenseTotal: 0,
   expensesType: ExpensesType.FIXED,
   expensesTotal: 30,
+  expensesRange: 5,
   lineItems: [
     {
       id: "khj214-hj2k34234-9s8ef",
@@ -56,6 +62,9 @@ export const expensesSlice = createSlice({
       action: PayloadAction<FixedExpensesTotal>
     ) => {
       state.fixedExpenseTotal = action.payload.fixedExpenseTotal;
+    },
+    updateExpensesRange: (state, action: PayloadAction<ExpensesRange>) => {
+      state.expensesRange = action.payload.expensesRange;
     },
     addLineItem: (state, action: PayloadAction<LineItem>) => {
       state.lineItems = [...state.lineItems, action.payload];
@@ -95,6 +104,7 @@ export const {
   removeLineItem,
   updateLineItem,
   updateFixedExpensesValue,
+  updateExpensesRange,
 } = expensesSlice.actions;
 
 export default expensesSlice.reducer;

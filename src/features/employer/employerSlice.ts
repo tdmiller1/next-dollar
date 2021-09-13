@@ -8,11 +8,13 @@ export const enum IncomeVariation {
 export interface EmployerState {
   primaryIncomeType: IncomeVariation;
   salary: number;
+  newJobRisk: number | number[];
 }
 
 const initialState: EmployerState = {
   primaryIncomeType: IncomeVariation.FIXED,
   salary: 0,
+  newJobRisk: 0,
 };
 
 export const employerSlice = createSlice({
@@ -25,10 +27,14 @@ export const employerSlice = createSlice({
     updateSalary: (state, action: PayloadAction<number>) => {
       state.salary = action.payload;
     },
+    updateNewJobRisk: (state, action: PayloadAction<number>) => {
+      state.newJobRisk = action.payload;
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { updateIncomeType, updateSalary } = employerSlice.actions;
+export const { updateIncomeType, updateSalary, updateNewJobRisk } =
+  employerSlice.actions;
 
 export default employerSlice.reducer;
