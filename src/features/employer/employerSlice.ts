@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-export const enum IncomeVariation {
+export enum IncomeVariation {
   FIXED = "FIXED",
   VARIABLE = "VARIABLE",
 }

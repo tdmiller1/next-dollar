@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-export const enum GoalType {
+export enum GoalType {
   FIRE = "FIRE",
   RETIRE_COMFORTABLY = "RETIRE_COMFORTABLY",
   CATCH_UP = "CATCH_UP",

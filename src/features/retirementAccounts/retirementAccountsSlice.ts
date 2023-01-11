@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-export const enum RetirementAccountType {
+export enum RetirementAccountType {
   ORIGINAL,
   ROTH_IRA,
   TRADITIONAL_IRA,

@@ -12,7 +12,7 @@ export interface FixedExpensesTotal {
   fixedExpenseTotal: number;
 }
 
-export const enum ExpensesType {
+export enum ExpensesType {
   FIXED = "FIXED",
   CALCULATED = "CALCULATED",
 }

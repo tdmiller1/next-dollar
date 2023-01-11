@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-export const enum LoanType {
+export enum LoanType {
   AUTO = "AUTO",
   MORTGAGE = "MORTGAGE",
   STUDENT = "STUDENT",
