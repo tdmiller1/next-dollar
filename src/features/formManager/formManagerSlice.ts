@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-export const enum FormStateType {
+export enum FormStateType {
   DEMOGRAPHICS = "DEMOGRAPHICS",
   EXPENSES = "EXPENSES",
   EMPLOYER = "EMPLOYER",

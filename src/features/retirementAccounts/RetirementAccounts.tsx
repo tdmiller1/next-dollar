@@ -55,6 +55,12 @@ export function RetirementAccounts(): React.ReactElement {
       taxDeffered: true,
       employerSponsored: true,
     },
+    {
+      id: RetirementAccountType.HSA_PLAN,
+      name: "Health Savings Account (HSA)",
+      taxDeffered: true,
+      employerSponsored: true,
+    },
   ];
 
   return (
@@ -65,63 +71,92 @@ export function RetirementAccounts(): React.ReactElement {
             const accountData =
               retirementAccountsData.retirementAccounts[account.id];
             return (
-              <Box
-                margin={2}
-                display="flex"
-                flexDirection="row"
-                alignItems="center"
-              >
-                <Box display="flex" sx={{ minWidth: 175 }}>
+              <>
+                <Box
+                  margin={2}
+                  display="flex"
+                  flexDirection="row"
+                  alignItems="center"
+                >
+                  <Box display="flex" sx={{ minWidth: 175 }}>
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          checked={accountData.active}
+                          onChange={(e) => {
+                            dispatch(
+                              toggleRetirementAccount({
+                                ...accountData,
+                                account,
+                                checked: e.target.checked,
+                                amount: accountData.amount,
+                                match:
+                                  !e.target.checked && accountData.match
+                                    ? false
+                                    : accountData.match,
+                              })
+                            );
+                          }}
+                        />
+                      }
+                      label={account.name}
+                    />
+                  </Box>
+                  <FormControl fullWidth sx={{ m: 1 }}>
+                    <InputLabel
+                      disabled={!accountData.active}
+                      htmlFor="outlined-adornment-amount"
+                    >
+                      Amount
+                    </InputLabel>
+                    <OutlinedInput
+                      type="number"
+                      id="outlined-adornment-amount"
+                      disabled={!accountData.active}
+                      label="Amount"
+                      startAdornment={
+                        <InputAdornment position="start">$</InputAdornment>
+                      }
+                      value={accountData.amount}
+                      onChange={(e) => {
+                        const amount = parseInt(e.target.value, 10);
+                        if (isNegative(amount)) return;
+                        dispatch(
+                          toggleRetirementAccount({
+                            ...accountData,
+                            account,
+                            amount,
+                            checked: accountData.active,
+                          })
+                        );
+                      }}
+                    />
+                  </FormControl>
+                </Box>
+                {account.id === RetirementAccountType.ORIGINAL && (
                   <FormControlLabel
+                    sx={{ ml: 6 }}
                     control={
                       <Checkbox
-                        checked={accountData.active}
+                        disabled={!accountData.active}
+                        checked={accountData.match}
                         onChange={(e) => {
                           dispatch(
                             toggleRetirementAccount({
                               ...accountData,
                               account,
-                              checked: e.target.checked,
+                              checked: accountData.active,
                               amount: accountData.amount,
+                              match: e.target.checked,
                             })
                           );
                         }}
                       />
                     }
-                    label={account.name}
+                    label="Does your employer offer a match and are you contributing up to it?"
                   />
-                </Box>
-                <FormControl fullWidth sx={{ m: 1 }}>
-                  <InputLabel
-                    disabled={!accountData.active}
-                    htmlFor="outlined-adornment-amount"
-                  >
-                    Amount
-                  </InputLabel>
-                  <OutlinedInput
-                    type="number"
-                    id="outlined-adornment-amount"
-                    disabled={!accountData.active}
-                    label="Amount"
-                    startAdornment={
-                      <InputAdornment position="start">$</InputAdornment>
-                    }
-                    value={accountData.amount}
-                    onChange={(e) => {
-                      const amount = parseInt(e.target.value, 10);
-                      if (isNegative(amount)) return;
-                      dispatch(
-                        toggleRetirementAccount({
-                          ...accountData,
-                          account,
-                          amount,
-                          checked: accountData.active,
-                        })
-                      );
-                    }}
-                  />
-                </FormControl>
-              </Box>
+                )}
+              </>
             );
           })}
         </FormGroup>
