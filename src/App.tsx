@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { Provider } from "react-redux";
-import { store } from "./store";
+import { useDispatch } from "react-redux";
 import { ThemeProvider, CssBaseline, Box } from "@mui/material";
+import decode from "jwt-decode";
 import FormManager from "./features/formManager/FormManager";
 import { theme } from "./theme/theme";
 import { Redirect, Route, useHistory } from "react-router-dom";
 import { ReduxStoreVisualizer } from "./features/ReduxStoreVisualizer";
-// import { ThemeVisualizer } from "./features/ThemeVisualizer";
+import { updateSub } from "./features/demographics/demographicSlice";
 
 function App(): React.ReactElement {
+  const dispatch = useDispatch();
   const [isAuthenticated, setIsAuthenticated] = useState(
     !!localStorage.getItem("id_token")
   );
@@ -16,9 +17,12 @@ function App(): React.ReactElement {
   const regex = /#id_token=(.*)/;
   const url = window.location.hash;
   const cognitoResponse = url.match(regex)?.[1];
+  console.log(cognitoResponse);
   const token = cognitoResponse?.substring(0, cognitoResponse.length - 34);
 
   if (token) {
+    const tokenObj: { sub: string } = decode(token);
+    dispatch(updateSub(tokenObj.sub as string));
     localStorage.setItem("id_token", token);
     setIsAuthenticated(true);
     history.push("/home");
@@ -31,27 +35,22 @@ function App(): React.ReactElement {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Provider store={store}>
-        <Route path="/login">
-          {isAuthenticated && <Redirect to={{ pathname: "/home" }} />}
-          {!isAuthenticated && <RedirectComponent />}
-        </Route>
-        <Route path="/">
-          {!isAuthenticated && <Redirect to={{ pathname: "/login" }} />}
-          {isAuthenticated && <Redirect to={{ pathname: "/home" }} />}
-        </Route>
-        <Route path="/home">
-          {isAuthenticated && (
-            <Box
-              sx={{ height: "100vh", width: "100vw", margin: 0, padding: 0 }}
-            >
-              <FormManager />
-            </Box>
-          )}
-        </Route>
-        {/* <ThemeVisualizer />*/}
-        <ReduxStoreVisualizer />
-      </Provider>
+      <Route path="/login">
+        {isAuthenticated && <Redirect to={{ pathname: "/home" }} />}
+        {!isAuthenticated && <RedirectComponent />}
+      </Route>
+      <Route path="/">
+        {!isAuthenticated && <Redirect to={{ pathname: "/login" }} />}
+        {isAuthenticated && <Redirect to={{ pathname: "/home" }} />}
+      </Route>
+      <Route path="/home">
+        {isAuthenticated && (
+          <Box sx={{ height: "100vh", width: "100vw", margin: 0, padding: 0 }}>
+            <FormManager />
+          </Box>
+        )}
+      </Route>
+      <ReduxStoreVisualizer />
     </ThemeProvider>
   );
 }
